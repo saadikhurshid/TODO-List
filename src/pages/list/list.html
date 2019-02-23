@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Items List</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-right block clear menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid padding>
+    <ion-row>
+      <ion-col>Category</ion-col>
+      <ion-col>Item Description</ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of items; let i=index">
+      <ion-item padding>
+        <h2>
+          <span>{{item.date}}</span><br>
+          Category: {{item.type}}<br>
+          {{item.description}}
+        </h2>
+        <h2 item-end>
+            Amount: ${{item.amount}}
+          </h2>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="primary" (click)="editData(item.rowid)">
+          <ion-icon name="paper"></ion-icon>
+        </button>
+        <button ion-button color="danger" (click)="deleteData(item.rowid)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <button ion-button block (click)="addpage()">Add</button>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+      <ion-title>SubTotal: ${{balance}}</ion-title>
+    </ion-toolbar>
+  </ion-footer>
+

@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Transactions</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-right block clear menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="AddItemForm" >
+          <ion-row>
+              <ion-col col-12>
+                <!--   <ion-item>
+                      <ion-label>Date</ion-label>
+                      <ion-datetime displayFormat="YYYY/MM/DD" formControlName="date" required=""></ion-datetime>
+                    </ion-item> -->
+              <ion-item> 
+                  <ion-label>Caterogy Type</ion-label>
+                  <ion-select (ionChange)="onChange($event)" multiple="true" formControlName="Category">
+                    <ion-option *ngFor="let expense of expenses; let i=index" value="{{expense.name}}">
+                      {{expense.name}}
+                    </ion-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item> 
+                  <ion-label>Item Type</ion-label>
+                  <ion-select multiple="true" formControlName="Items">
+                    <ion-option *ngFor="let item of subItems; let i=index" value="{{item.description}}">
+                      {{item.description}}
+                    </ion-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Amount</ion-label>
+                    <ion-input  [(ngModel)]="value" (input)="onamountChange($event)" type="number" placeholder="Amount" formControlName="Amount" required="" ></ion-input>
+                  </ion-item>
+                  <!--<ion-item>
+                      <ion-label>Description</ion-label>
+                      <ion-input type="number" placeholder="Amount" formControlName="Amount" required="" ></ion-input>
+                    </ion-item> -->
+              </ion-col>
+              </ion-row>
+  </form>
+  <button ion-button block (click)="saveData()">Add Transactions</button>
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of items; let i=index">
+      <ion-item padding>
+        <h2>
+          <span>{{item.date}}</span><br>
+          Category: {{item.type}}<br>
+          {{item.Amount}}
+        </h2>
+        <h2 item-end>
+            Amount: ${{item.amount}}
+          </h2>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="primary" (click)="editData(item.rowid)">
+          <ion-icon name="paper"></ion-icon>
+        </button>
+        <button ion-button color="danger" (click)="deleteData(item.rowid)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Add Categories</ion-title>
+      <ion-buttons end>
+          <button ion-button icon-right block clear menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding>
+  <h2>Add Category Data</h2>
+  <form (ngSubmit)="saveData()">
+    <ion-item>
+    <!-- <ion-label>Category Name</ion-label> -->
+      <ion-input type="text" placeholder="Name" [(ngModel)]="data.name" name="name" required="" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <!-- <ion-label>Category Name</ion-label> -->
+        <ion-input type="text" placeholder="CategoryMin" [(ngModel)]="data.CategoryMin" name="CategoryMin" required="" ></ion-input>
+      </ion-item>
+      <ion-item >
+        <!-- <ion-label>Category Name</ion-label> -->
+          <ion-input type="text" placeholder="CategoryMax" [(ngModel)]="data.CategoryMax" name="y" required="" ></ion-input>
+        </ion-item>
+    <button ion-button type="submit" block>Save Data</button>
+  </form>
+  <ion-list>
+    <ion-item-sliding *ngFor="let category of  categories; let i=index">
+      <ion-item nopadding>
+     
+        <h1>
+          <span>{{category.name}}</span>
+          <span>{{category.CategoryMin}}</span>
+          <span>{{category.CategoryMax}}</span><br>
+        </h1>
+       
+        
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="primary" (click)="editData(category.rowid)">
+          <ion-icon name="paper"></ion-icon>
+        </button>
+        <button ion-button color="danger" (click)="deleteData(category.rowid)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

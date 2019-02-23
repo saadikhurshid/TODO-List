@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Edit Categories</ion-title>
+      <ion-buttons end>
+          <button ion-button icon-right block clear menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <h2>Edit Data</h2>
+  <form (ngSubmit)="updateData()">
+   
+    <ion-item>
+      <ion-label>Description</ion-label>
+      <ion-input type="text" placeholder="Name" [(ngModel)]="data.name" name="name" required="" ></ion-input>
+    </ion-item>
+   
+    <ion-input type="hidden" [(ngModel)]="data.rowid" name="rowid"></ion-input>
+    <button ion-button type="submit" block>Update Data</button>
+  </form>
+</ion-content>

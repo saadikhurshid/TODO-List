@@ -1,0 +1,63 @@
+<!--
+  Generated template for the MainPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+--><ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="card-background-page">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          <ion-card (click)="category()">
+              <img src="../../assets/imgs/icon_money.png"/>
+              <div class="card-title">Category</div>
+              <div class="card-subtitle">List of Categories</div>
+            </ion-card>
+      </ion-col>
+      <ion-col>
+          <ion-card (click)="items()">
+              <img src="../../assets/imgs/icon_user.png"/>
+              <div class="card-title">Items</div>
+              <div class="card-subtitle">List of Items</div>
+            </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+          <ion-card (click)="report()">
+              <img src="../../assets/imgs/icon_report.png"/>
+              <div class="card-title">Reports</div>
+              <div class="card-subtitle">List Reports</div>
+            </ion-card>
+      </ion-col>
+      <ion-col>
+          <ion-card (click)="search()">
+              <img src="../../assets/imgs/icon_setting.png"/>
+              <div class="card-title">Search</div>
+              <div class="card-subtitle">Search Items</div>
+            </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+            <ion-card (click)="transcations()">
+                <img src="../../assets/imgs/icon_report.png"/>
+                <div class="card-title">Transaction</div>
+                <div class="card-subtitle">Transcations Details</div>
+              </ion-card>
+        </ion-col>
+       
+      </ion-row>
+  </ion-grid>
+    
+  
+</ion-content>

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Categories</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-right block clear menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item-sliding *ngFor="let category of  categories; let i=index">
+      <ion-item nopadding>
+     
+        <h1>
+          <span>{{category.name}}</span>
+          <span>{{category.CategoryMin}}</span>
+          <span>{{category.CategoryMax}}</span><br>
+        </h1>
+       
+        
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="primary" (click)="editData(category.rowid)">
+          <ion-icon name="paper"></ion-icon>
+        </button>
+        <button ion-button color="danger" (click)="deleteData(category.rowid)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <button ion-button block (click)="addpage()">Add</button>
+</ion-content>
