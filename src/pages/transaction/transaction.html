@@ -13,10 +13,10 @@
     <form [formGroup]="AddItemForm" >
           <ion-row>
               <ion-col col-12>
-                <!--   <ion-item>
+                  <ion-item>
                       <ion-label>Date</ion-label>
-                      <ion-datetime displayFormat="YYYY/MM/DD" formControlName="date" required=""></ion-datetime>
-                    </ion-item> -->
+                      <ion-datetime displayFormat="YYYY/MM/DD"  required=""></ion-datetime>
+                    </ion-item>
               <ion-item> 
                   <ion-label>Caterogy Type</ion-label>
                   <ion-select (ionChange)="onChange($event)" multiple="true" formControlName="Category">
@@ -54,7 +54,7 @@
           {{item.Amount}}
         </h2>
         <h2 item-end>
-            Amount: ${{item.amount}}
+            Amount: Rs {{balance}}
           </h2>
       </ion-item>
       <ion-item-options side="right">

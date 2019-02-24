@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Chart } from 'chart.js';
-
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 @Component({
   selector: 'page-report',
   templateUrl: 'report.html'
@@ -15,20 +15,39 @@ export class ReportPage {
     barChart: any;
     doughnutChart: any;
     lineChart: any;
-
-    constructor(public navCtrl: NavController) {
+    chartDataName:any
+    chartDataValue:any
+    constructor(public navCtrl: NavController,private sqlite: SQLite) {
 
     }
 
     ionViewDidLoad() {
+        this.sqlite.create({
+            name: 'ionicdb.db',
+            location: 'default'
+          }).then((db: SQLiteObject) => {
+            db.executeSql('SELECT * FROM category ORDER BY rowid DESC', [])
+            .then(res => {
+                this.chartDataName = [];
+                for(var i=0; i<res.rows.length; i++) {
+                  this.chartDataName.push({name:res.rows.item(i).name})
+                }
+            }).then(()=>{
+                db.executeSql('SELECT * FROM tanscations ORDER BY rowid DESC', [])
+    .then(res => {
+      this.chartDataValue = [];
+      for(var i=0; i<res.rows.length; i++) {
+        this.chartDataValue.push({Amount:res.rows.item(i).Amount})
+      }
+    }).then(()=>{
         this.barChart = new Chart(this.barCanvas.nativeElement, {
 
             type: 'bar',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: this.chartDataName,
                 datasets: [{
                     label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: this.chartDataValue,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -64,10 +83,10 @@ export class ReportPage {
 
             type: 'doughnut',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels:this.chartDataName,
                 datasets: [{
                     label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: this.chartDataValue,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -114,13 +133,18 @@ export class ReportPage {
                         pointHoverBorderWidth: 2,
                         pointRadius: 1,
                         pointHitRadius: 10,
-                        data: [65, 59, 80, 81, 56, 55, 40],
+                        data: this.chartDataValue,
                         spanGaps: false,
                     }
                 ]
             }
 
         });
+    })
+            })
+            
+        })
+
 
     }
 

@@ -114,14 +114,15 @@ getitems() {
     name: 'ionicdb.db',
     location: 'default'
   }).then((db: SQLiteObject) => {
-    db.executeSql('CREATE TABLE IF NOT EXISTS tanscations(rowid INTEGER PRIMARY KEY, type TEXT, Amount TEXT)',[])
+    db.executeSql('CREATE TABLE IF NOT EXISTS tanscations(rowid INTEGER PRIMARY KEY, type TEXT, Amount TEXT,ItemType TEXT)',[])
     .then(res => console.log('Executed SQL'))
     .catch(e => console.log(e));
     db.executeSql('SELECT * FROM tanscations ORDER BY rowid DESC', [])
     .then(res => {
       this.items = [];
       for(var i=0; i<res.rows.length; i++) {
-        this.items.push({rowid:res.rows.item(i).rowid,type:res.rows.item(i).type,Amount:res.rows.item(i).Amount})
+        this.items.push({rowid:res.rows.item(i).rowid,type:res.rows.item(i).type,Amount:res.rows.item(i).Amount,
+          ItemType:res.rows.item(i).ItemType})
       }
     }).catch(e => console.log(e));
     db.executeSql('SELECT SUM(amount) AS totalExpense FROM tanscations WHERE amount', [])
@@ -159,10 +160,11 @@ saveData() {
     let type=this.AddItemForm.value
     let data={
       type:type.Category,
-      Amount:type.Amount
+      Amount:type.Amount,
+      ItemType:type.ItemType
     }
 
-    db.executeSql('INSERT INTO tanscations VALUES(NULL,?,?)',[data.type,data.Amount])
+    db.executeSql('INSERT INTO tanscations VALUES(NULL,?,?,?)',[data.type,data.Amount,data.ItemType])
       .then(res => {
         this.toast.show('Data saved', '5000', 'center').subscribe(
           toast => {
